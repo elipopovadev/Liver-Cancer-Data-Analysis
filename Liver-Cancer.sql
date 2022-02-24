@@ -72,7 +72,7 @@ SELECT @FINALRESULTEUROPE;
 
 
 -- Total deaths in United States, United Kingdom, Bulgaria, Germany and France  - Liver cancer for year 1990 to 2019
--- The result is: United States: 23 807; France: 7792; Germany: 7743; United Kingdom: 893
+-- The result is: United States: 23 807; France: 7792; Germany: 7743; United Kingdom: 5173; Bulgaria 893
 SELECT ENTITY, MAX([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]) AS [Total Deaths Liver cancer for year 1990 to 2019]
 FROM [dbo].[Total-cancer-deaths-by-type]
 GROUP BY ENTITY 
