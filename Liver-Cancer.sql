@@ -184,5 +184,3 @@ FROM CTE
 JOIN [dbo].[Cancer-death-rates-by-age] ON CTE.ENTITY = [dbo].[Cancer-death-rates-by-age].ENTITY AND 
 CTE.YEAR = [dbo].[Cancer-death-rates-by-age].YEAR
 GO
-
-
