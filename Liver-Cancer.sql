@@ -1,7 +1,6 @@
 USE Cancer
 GO
 
-
 -- Total deaths in the world - Liver cancer for year 2019
 -- The result is 6 938 035
 SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
