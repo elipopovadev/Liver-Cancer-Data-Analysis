@@ -1,11 +1,13 @@
 USE Cancer
 GO
 
+
 -- Total deaths in the world - Liver cancer for year 2019
 -- The result is 6 938 035
 SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 2019;
+GO
 
 
 -- Total deaths in the world - Liver cancer for year 1990
@@ -13,6 +15,7 @@ WHERE YEAR = 2019;
 SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 1990;
+GO
 
 
 -- Calculate Percentage Increase Total deaths in the world - Liver cancer from 1990 to 2019
@@ -21,6 +24,7 @@ DECLARE @RESULTFOR1990 AS DECIMAL = 5183360
 DECLARE @RESULTFOR2019 AS DECIMAL = 6938035
 DECLARE @FINALRESULT AS DECIMAL = ((@RESULTFOR2019 - @RESULTFOR1990) /  @RESULTFOR1990) * 100
 SELECT @FINALRESULT AS [Percentage Increase Total deaths in the world - Liver cancer];
+GO
 
 
 -- Calculate Total deaths in America - Liver cancer for year 2019
@@ -28,6 +32,7 @@ SELECT @FINALRESULT AS [Percentage Increase Total deaths in the world - Liver ca
 SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 2019 AND ENTITY = 'AMERICA';
+GO
 
 
 -- Calculate Total deaths in America - Liver cancer for year 1990
@@ -35,6 +40,7 @@ WHERE YEAR = 2019 AND ENTITY = 'AMERICA';
 SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 1990 AND ENTITY = 'AMERICA';
+GO
 
 
 -- Calculate Percentage Increase Total deaths in America - Liver cancer from 1990 to 2019
@@ -52,6 +58,7 @@ WHERE YEAR = 2019 AND ENTITY = 'AMERICA');
 DECLARE @FINALRESULTAMERICA AS DECIMAL
 SET @FINALRESULTAMERICA = ((@RESULTFOR2019AMERICA - @RESULTFOR1990AMERICA) /  @RESULTFOR1990AMERICA) * 100
 SELECT @FINALRESULTAMERICA;
+GO
 
 
 -- Calculate Percentage Increase Total deaths in Europe - Liver cancer from 1990 to 2019
@@ -69,6 +76,7 @@ WHERE YEAR = 2019 AND ENTITY = 'EUROPE');
 DECLARE @FINALRESULTEUROPE AS DECIMAL
 SET @FINALRESULTEUROPE = ((@RESULTFOR2019EUROPE - @RESULTFOR1990EUROPE) /  @RESULTFOR1990EUROPE) * 100
 SELECT @FINALRESULTEUROPE;
+GO
 
 
 -- Total deaths in United States, United Kingdom, Bulgaria, Germany and France  - Liver cancer for year 1990 to 2019
@@ -78,6 +86,7 @@ FROM [dbo].[Total-cancer-deaths-by-type]
 GROUP BY ENTITY 
 HAVING (ENTITY = 'United States' or ENTITY= 'United Kingdom' or ENTITY = 'Bulgaria' or Entity = 'Germany' or Entity = 'France')
 Order by [Total Deaths Liver cancer for year 1990 to 2019] DESC;
+GO
 
 
 -- Deaths in Europe - Liver cancer for year 1990 to 2019
@@ -85,6 +94,7 @@ Order by [Total Deaths Liver cancer for year 1990 to 2019] DESC;
 SELECT ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE ENTITY = 'EUROPE';
+GO
 
 
 -- Select the year with maximum deaths in Europe - Liver cancer for year 1990 to 2019
@@ -101,6 +111,7 @@ GROUP BY ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Numbe
 SELECT * FROM CTE
 WHERE [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] = 
 (SELECT MAX([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]) FROM CTE);
+GO
 
 
 -- Select the year with minimum deaths in America - Liver cancer for year 1990 to 2019
@@ -117,6 +128,7 @@ GROUP BY ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Numbe
 SELECT * FROM CTE
 WHERE [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] = 
 (SELECT MIN([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]) FROM CTE);
+GO
 
 
 -- Select all entities with the year with maximum deaths - Liver cancer for year 1990 to 2019
@@ -134,6 +146,7 @@ SELECT ENTITY, YEAR,  [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number
 FROM CTE
 WHERE  RANKBYDEATHS = 1
 ORDER BY [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] DESC;
+GO
 
 
 -- Select all entities with the year with minimum deaths - Liver cancer for year 1990 to 2019
@@ -151,6 +164,7 @@ SELECT ENTITY, YEAR,  [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number
 FROM CTE
 WHERE  RANKBYDEATHS = 1
 ORDER BY [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] ASC;
+GO
 
 
 -- Select all entities, deaths - liver cancer and total deaths- neoplasms for 2019
@@ -169,3 +183,6 @@ SELECT DISTINCT(CTE.ENTITY), CTE.YEAR, CTE.DEATHS, [Deaths - Neoplasms - Sex: Bo
 FROM CTE
 JOIN [dbo].[Cancer-death-rates-by-age] ON CTE.ENTITY = [dbo].[Cancer-death-rates-by-age].ENTITY AND 
 CTE.YEAR = [dbo].[Cancer-death-rates-by-age].YEAR
+GO
+
+
