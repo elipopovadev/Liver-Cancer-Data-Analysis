@@ -1,7 +1,6 @@
 USE Cancer
 GO
 
-
 -- Total deaths in the world - Liver cancer for year 2019
 -- The result is 6 938 035
 SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
@@ -19,10 +18,10 @@ GO
 
 
 -- Calculate Percentage Increase Total deaths in the world - Liver cancer from 1990 to 2019
--- The result is: 34%
-DECLARE @RESULTFOR1990 AS DECIMAL = 5183360
-DECLARE @RESULTFOR2019 AS DECIMAL = 6938035
-DECLARE @FINALRESULT AS DECIMAL = ((@RESULTFOR2019 - @RESULTFOR1990) /  @RESULTFOR1990) * 100
+-- The result is: 33.9%
+DECLARE @RESULTFOR1990 AS FLOAT = 5183360
+DECLARE @RESULTFOR2019 AS FLOAT = 6938035
+DECLARE @FINALRESULT AS DECIMAL(8, 1) = ((@RESULTFOR2019 - @RESULTFOR1990) /  @RESULTFOR1990) * 100
 SELECT @FINALRESULT AS [Percentage Increase Total deaths in the world - Liver cancer];
 GO
 
@@ -44,36 +43,36 @@ GO
 
 
 -- Calculate Percentage Increase Total deaths in America - Liver cancer from 1990 to 2019
--- The result is: 204%
-DECLARE @RESULTFOR1990AMERICA AS DECIMAL
-SET @RESULTFOR1990AMERICA = (SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
+-- The result is: 203.9%
+DECLARE @RESULTFOR1990AMERICA AS FLOAT
+SET @RESULTFOR1990AMERICA = ((SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
-WHERE YEAR = 1990 AND ENTITY = 'AMERICA');
+WHERE YEAR = 1990 AND ENTITY = 'AMERICA'));
 
-DECLARE @RESULTFOR2019AMERICA AS DECIMAL
+DECLARE @RESULTFOR2019AMERICA AS FLOAT
 SET @RESULTFOR2019AMERICA = (SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 2019 AND ENTITY = 'AMERICA');
 
-DECLARE @FINALRESULTAMERICA AS DECIMAL
+DECLARE @FINALRESULTAMERICA AS DECIMAL(8,1)
 SET @FINALRESULTAMERICA = ((@RESULTFOR2019AMERICA - @RESULTFOR1990AMERICA) /  @RESULTFOR1990AMERICA) * 100
 SELECT @FINALRESULTAMERICA;
 GO
 
 
 -- Calculate Percentage Increase Total deaths in Europe - Liver cancer from 1990 to 2019
--- The result is 79%
-DECLARE @RESULTFOR1990EUROPE AS DECIMAL
+-- The result is 79.2%
+DECLARE @RESULTFOR1990EUROPE AS FLOAT
 SET @RESULTFOR1990EUROPE = (SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 1990 AND ENTITY = 'EUROPE');
 
-DECLARE @RESULTFOR2019EUROPE AS DECIMAL
+DECLARE @RESULTFOR2019EUROPE AS FLOAT
 SET @RESULTFOR2019EUROPE = (SELECT [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
 WHERE YEAR = 2019 AND ENTITY = 'EUROPE');
 
-DECLARE @FINALRESULTEUROPE AS DECIMAL
+DECLARE @FINALRESULTEUROPE AS DECIMAL(8,1)
 SET @FINALRESULTEUROPE = ((@RESULTFOR2019EUROPE - @RESULTFOR1990EUROPE) /  @RESULTFOR1990EUROPE) * 100
 SELECT @FINALRESULTEUROPE;
 GO
@@ -184,3 +183,4 @@ FROM CTE
 JOIN [dbo].[Cancer-death-rates-by-age] ON CTE.ENTITY = [dbo].[Cancer-death-rates-by-age].ENTITY AND 
 CTE.YEAR = [dbo].[Cancer-death-rates-by-age].YEAR
 GO
+
