@@ -3,26 +3,45 @@ GO
 
 -- Total deaths in the world - Liver cancer for year 2019
 -- The result is 6 938 035
-SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
+CREATE FUNCTION FUN_TotalDeathsInTheWorldFor2019()
+RETURNS DECIMAL(8,1)
+AS
+BEGIN
+DECLARE @RESULT2019 DECIMAL(8, 1) = (SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 FROM [dbo].[Total-cancer-deaths-by-type]
-WHERE YEAR = 2019;
+WHERE YEAR = 2019)
+RETURN @RESULT2019
+END;
+
+DECLARE @VALUE DECIMAL(8,1)
+SELECT @VALUE =  dbo.FUN_TotalDeathsInTheWorldFor2019()
+PRINT  @VALUE
 GO
 
 
 -- Total deaths in the world - Liver cancer for year 1990
 -- The result is 5 183 360
-SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
+CREATE FUNCTION FUN_TotalDeathsInTheWorldFor1990()
+RETURNS DECIMAL(8,1)
+AS
+BEGIN
+DECLARE @RESULT1990 DECIMAL(8, 1) = (SELECT SUM([Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 FROM [dbo].[Total-cancer-deaths-by-type]
-WHERE YEAR = 1990;
+WHERE YEAR = 1990)
+RETURN @RESULT1990
+END;
+
+DECLARE @VALUE DECIMAL(8,1)
+SELECT @VALUE =  dbo.FUN_TotalDeathsInTheWorldFor1990()
+PRINT  @VALUE
 GO
 
 
 -- Calculate Percentage Increase Total deaths in the world - Liver cancer from 1990 to 2019
 -- The result is: 33.9%
-DECLARE @RESULTFOR1990 AS FLOAT = 5183360
-DECLARE @RESULTFOR2019 AS FLOAT = 6938035
-DECLARE @FINALRESULT AS DECIMAL(8, 1) = ((@RESULTFOR2019 - @RESULTFOR1990) /  @RESULTFOR1990) * 100
-SELECT @FINALRESULT AS [Percentage Increase Total deaths in the world - Liver cancer];
+DECLARE @FINALRESULT DECIMAL(8,1) 
+SET @FINALRESULT = (dbo.FUN_TotalDeathsInTheWorldFor2019() - dbo.FUN_TotalDeathsInTheWorldFor1990()) / dbo.FUN_TotalDeathsInTheWorldFor1990() * 100
+PRINT  @FINALRESULT
 GO
 
 
