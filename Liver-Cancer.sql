@@ -107,7 +107,7 @@ Order by [Total Deaths Liver cancer for year 1990 to 2019] DESC;
 GO
 
 
--- Deaths in Europe - Liver cancer for year 1990 to 2019
+-- Deaths in Europe - Liver cancer from year 1990 to 2019
 -- The result is: Europe: 1990: 33 604; ... Europe: 2000: 41 423; ... Europe: 2019: 60 222;
 SELECT ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)]
 FROM [dbo].[Total-cancer-deaths-by-type]
@@ -115,7 +115,7 @@ WHERE ENTITY = 'EUROPE';
 GO
 
 
--- Select the year with maximum deaths in Europe - Liver cancer for year 1990 to 2019
+-- Select the year with maximum deaths in Europe - Liver cancer from year 1990 to 2019
 -- The result is: Europe: 2019: 60 220
 WITH CTE(ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 AS
@@ -132,7 +132,7 @@ WHERE [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] =
 GO
 
 
--- Select the year with minimum deaths in America - Liver cancer for year 1990 to 2019
+-- Select the year with minimum deaths in America - Liver cancer from year 1990 to 2019
 -- The result is: America: 1990: 15 180;
 WITH CTE(ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)])
 AS
@@ -149,7 +149,7 @@ WHERE [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] =
 GO
 
 
--- Select all entities with the year with maximum deaths - Liver cancer for year 1990 to 2019
+-- Select all entities with the year with maximum deaths - Liver cancer from year 1990 to 2019
 -- The Result is: Asia: 1999: 397 193; China: 1997: 296 720; European Region: 2019: 63 501...
 WITH CTE(ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)], RANKBYDEATHS)
 AS
@@ -167,7 +167,7 @@ ORDER BY [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)] DESC;
 GO
 
 
--- Select all entities with the year with minimum deaths - Liver cancer for year 1990 to 2019
+-- Select all entities with the year with minimum deaths - Liver cancer from year 1990 to 2019
 -- The result is: Nauru: 1990: 0; Austria: 1990: 387; Bulgaria: 2015: 592; Canada: 1990: 618; United Kingdom: 1990: 1681 ...
 WITH CTE(ENTITY, YEAR, [Deaths - Liver cancer - Sex: Both - Age: All Ages (Number)], RANKBYDEATHS)
 AS
